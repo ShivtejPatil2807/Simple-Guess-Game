@@ -1,288 +1,282 @@
 import streamlit as st
 import random
-import os
 
-# STREAMLIT PAGE CONFIGURATION
+ATTEMPTS = 3
+
 st.set_page_config(
     page_title = "Guess Game",
     page_icon = "🤔",
     layout = "centered"
 )
-st.title("🎯 Simple Number Guessing Game")
 
-# SESSION STATE INITIALIZATION
+def initialize_state():
+    Stages = {
+        "logged_in": False,
+        "username": "",
+        "stage": 1,
+        "secret_number": random.randint(1, 50),
+        "attempts": 0,
+        "game_over": False,
+        "final_won": False,
+        "challenge_a": random.randint(2, 10),
+        "challenge_b": random.randint(2, 10),
+    }
+    for key, value in Stages.items():
+        if key not in st.session_state:
+            st.session_state[key] = value
 
-# Login
-if "logged_in" not in st.session_state:
-    st.session_state.logged_in = False
 
-if "username" not in st.session_state:
-    st.session_state.username = ""
-
-# Game
-if "secret_number" not in st.session_state:
-    st.session_state.secret_number = random.randint(1, 50)
-
-# count the number of guesses
-if "attempts" not in st.session_state:
+def start_stage_one():
+    st.session_state.stage = 1
+    st.session_state.secret_number = random.randint(1,50)
     st.session_state.attempts = 0
-
-if "game_over" not in st.session_state:
     st.session_state.game_over = False
-
-# controls movement from Stage 1 to Stage 2
-if "next_stage" not in st.session_state:
-    st.session_state.next_stage = False
-
-# controls movement from Stage 2 to Stage 3
-if "third_stage" not in st.session_state:
-    st.session_state.third_stage = False
-
-# controls movement to the final Stage
-if "final_stage" not in st.session_state:
-    st.session_state.final_stage = False
-
-if "final_won" not in st.session_state:
     st.session_state.final_won = False
 
-#===== RESET GAME =====
-def reset_game():
+
+def start_final_stage():
+    st.session_state.stage = 4
+    st.session_state.secret_number = random.randint(1, 30)
+    st.session_state.attempts = 0
+    st.session_state.game_over = False
+    st.session_state.final_won = False
+
+
+def start_stage_three():
+    st.session_state.stage = 3
+    st.session_state.challenge_a = random.randint(2, 10)
+    st.session_state.challenge_b = random.randint(2, 10)
+
+
+def restart_game():
+    st.session_state.logged_in = False
+    st.session_state.username = ""
+    st.session_state.stage = 1
     st.session_state.secret_number = random.randint(1, 50)
     st.session_state.attempts = 0
     st.session_state.game_over = False
+    st.session_state.final_won = False
+    st.session_state.challenge_a = random.randint(1, 10)
+    st.session_state.challenge_b = random.randint(1, 10)
 
-#===== LOGIN PAGE =====
-if not st.session_state.logged_in:
+
+def show_login():
     st.subheader("Welcome! Please enter your name to play.")
 
     with st.form("login_form"):
-        username_input = st.text_input("Username:")
-        submit_login = st.form_submit_button("Submit")
+        username = st.text_input("Username:")
+        submit = st.form_submit_button("Start Game")
 
-        if submit_login:
-            if username_input.strip() != "":
-                st.session_state.username = username_input.strip()
+        if submit:
+            username = username.strip()
+
+            if username:
+                st.session_state.username = username
                 st.session_state.logged_in = True
                 st.rerun()
             else:
-                st.error("Please enter a valid username to continue.")
+                st.error("Please enter a valid username.")
 
-elif not st.session_state.next_stage :
 
-#===== GAME PAGE =====
-    st.success(f"Login successfully, **{st.session_state.username}**! ")
-    st.write("I have picked a random number between **1 and 50**. Try to guess it!")
+def show_stage_one():
+    st.success(f"Welcome, **{st.session_state.username}**!")
+    st.write(f"I have selected a number between 1 to 50.")
 
-#===== GUESS INPUT =====
     guess = st.number_input(
         "Enter your guess:",
         min_value = 1,
         max_value = 50,
-        step = 1,
+        step=1
     )
 
-#===== SUBMIT GUESS =====
     if st.button("Submit Guess"):
-        # Increase Attempts
         st.session_state.attempts += 1
 
-        # Check guess
         if guess < st.session_state.secret_number:
             st.warning("📉 Too low! Try a higher number.")
+
         elif guess > st.session_state.secret_number:
             st.warning("📈 Too high! Try a lower number.")
+
         else:
-            st.success(
-                f"🎉 Congratulations {st.session_state.username}! You guessed the"
-                f" number in {st.session_state.attempts} attempts."
-            )
             st.session_state.game_over = True
+
+            st.success(
+                f"🎉 Congratulations **{st.session_state.username}**! "
+                f"You guessed the number in "
+                f"**{st.session_state.attempts} attempts**."
+            )
             st.balloons()
 
-#===== BUTTONS AFTER WINING THE STAGE =====
-
     if st.session_state.game_over:
-        col1,col2 = st.columns(2)
+        col1, col2 = st.columns(2)
 
-        # Play Again Button
         with col1:
             if st.button("Play Again"):
-                reset_game()
+                start_stage_one()
                 st.rerun()
 
-        # Next Stage Button
         with col2:
             if st.button("Next Stage"):
-                # Move to stage 2 
-                st.session_state.next_stage = True
+                st.session_state.stage = 2
                 st.rerun()
 
-#===== STAGE 2 - WARNING AND INSTRUCTIONS =====
-elif not st.session_state.third_stage:
-    st.success("🎉Congratulations ! Your moving to the next level," \
-    "Your next opponent is you")
 
-    # instructions form
-    with st.form("Instructions"):
-        st.subheader("⚠️**CRITICAL WARNING READ BEFORE YOU ENTER**⚠️")
-        st.write("***1. You have successfully survied the first stage.***")
-        st.write("***2. Now, Your officially entered in this game.***")
-        st.write("***3. The puzzels are getting harder.***")
-        st.write("***4. One wrong decision could end your run. Think carefully before you act.***")
-        st.write("***5. Your next opponent is not computer... it is YOU.***")
-        st.write("***6. Stay focused. Stay calm. Trust nothinng.***")
-        st.write("***7. You chose to be on this stage and play your part right now.***")
-        st.write("***8."f" GOOD LUCK **{st.session_state.username}**... YOU'RE GOING TO NEED IT.***")
+def show_stage_two():
+    st.success("🎉 Congratulations! You're moving to the next level,Your next opponent is You.")
 
-        # Checkbox that the player must select
-        agree_checkbox = st.checkbox("I Understand the risk. I accept resposibility and choose to continue")
-        # Button to enter next stage
-        agree = st.form_submit_button("I AGREE - ENTER IF YOU DARE")
+    st.subheader("⚠️ CRITICAL WARNING READ BEFORE YOU ENTER ")
 
-        # Check whether button was clicked
-        if agree:
-            # Make sure checkbox was selected
+    st.write("**1.You have successfully completed the first stage.**" )
+
+    st.write("**2.The challenges are getting harder.**")
+
+    st.write("**3.One wrong decision could end your run.**")
+
+    st.write("**4.Your next opponent is not the computer... it is YOU.**")
+
+    st.write("**5.Stay focused. Stay calm. Trust your decisions.**")
+
+    st.write(f"**Good luck {st.session_state.username}.**")
+
+    with st.form("stage_two_form"):
+        agree_checkbox = st.checkbox("I understand the rules and choose to continue.")
+
+        continue_button = st.form_submit_button("I AGREE - ENTER IF YOU DARE")
+
+        if continue_button:
             if agree_checkbox:
-                # Move to the third stage
-                st.session_state.third_stage = True
+                start_stage_three()
                 st.rerun()
             else:
-                # checkbox was not selected
-                st.error("You must check the box before entering the next stage !")
+                st.error("You must accept the rules before continuing.")
 
-#===== STAGE 3 - PATH VERIFICATION =====
-elif not st.session_state.final_stage:
-    st.subheader("👁️ Now the real challenge begins.")
-    with st.form("Risk"):
-        # instructions for the player
-        st.write("**1.GO to Command Prompt C:\> on your laptop/PC💻.**")
-        st.write("**2.For Linux/Unix/macOs:Open terminal.**")
-        st.write("**2.systeminfo run this command.**")
-        st.write("**3.Copy the System Directory : path and paste here⬇️.**")
 
-    # Path input form
-    with st.form("Path"):
-        user_enter = st.text_input("Paste Your System Directory (path):",placeholder = r"C:\Users\JohnDoe\Documents\report")
-        # Submit Path
-        submit = st.form_submit_button("Submit")
+def show_stage_three():
+    st.subheader("👁️ Now the real challenge begins")
+    st.write("Before entering the final stage, solve this verification challenge.")
 
-        # Check if path submit
-        if submit:
-            if os.path.isdir(user_enter):
-                # Move to final stage
-                st.session_state.final_stage = True
+    a = st.session_state.challenge_a
+    b = st.session_state.challenge_b
 
-                # Create a new secret number for the final game
-                st.session_state.secret_number = random.randint(1, 30)
-                st.session_state.attempts = 0
-                st.session_state.game_over = False
-                st.session_state.final_won = False
+    correct_answer = (a + b) ** 2
+    st.info(f"If $a = {a}$ and $b = {b}$, What is the value of **(a+b)²**?")
 
-                # Reload application                                        
-                st.rerun()
-
-            else:
-                # Invalid directory
-                st.error("Invalid Path..! Please check the system path again ")
-
-#===== FINAL STAGE - ONLY 3 CHANCES =====
-else:
-    st.subheader("💀 FINAL STAGE")
-    # Tell player they have only 3 chances
-    st.warning("⚠️ You have ONLY 3 chances to guess the number!")
-    # Tell player the number range
-    st.write("I have selected a number between **1 and 30**.")
-
-#===== FINAL GAME STILL ACTIVE =====
-    if not st.session_state.game_over:
-        new_guess = st.number_input(
-            "Enter your guess:",
-            min_value=1,
-            max_value=30,
-            step=1
+    with st.form("verification_form"):
+        answer = st.number_input(
+            "Enter your answer:",
+            min_value = 0,
+            step = 1
         )
-        # Guess Button
+        submit = st.form_submit_button("Verify")
+
+        if submit:
+        
+            if answer == correct_answer:
+                st.success("✅ Verification successful!")
+                start_final_stage()
+                st.rerun()
+            else:
+                st.error("❌ Incorrect answer. Try again.")
+
+
+def show_final_stage():
+    st.subheader("💀 FINAL STAGE")
+    st.warning(f"⚠️ You have ONLY {ATTEMPTS} chances!")
+
+    st.write(f"I have selected a number between 1 to 30")
+
+    if not st.session_state.game_over:
+        guess = st.number_input(
+            "Enter your final guess:",
+            min_value = 1,
+            max_value = 30,
+            step = 1
+        )
+
         if st.button("☠️ GUESS"):
-            #increase attempts
             st.session_state.attempts += 1
 
-            # The number is gueed 
-            if new_guess == st.session_state.secret_number:
-
-                # Store that player won
+            if guess == st.session_state.secret_number:
                 st.session_state.final_won = True
-                # End Game
                 st.session_state.game_over = True
 
-                # Show Wining
                 st.success(
                     f"🎉🏆 CONGRATULATIONS "
-                    f"{st.session_state.username}! "
-                    f"YOU COMPLETED THIS GAME!"
+                    f"**{st.session_state.username}**!"
                 )
+                st.success("YOU COMPLETED THE GAME!")
                 st.balloons()
 
-            # Player used all 3 attempts
-            elif st.session_state.attempts == 3:
-
-                # End the final game
+            elif st.session_state.attempts >= ATTEMPTS:
                 st.session_state.game_over = True
 
-                # Show failure message
                 st.error("💀 YOU FAILED THE FINAL STAGE.")
 
-                # Reveal the secret number
-                st.write(f"The number was **"f"{st.session_state.secret_number}**.")
+                st.write("The number was "f"**{st.session_state.secret_number}**.")
 
-            # Guess to Low
-            elif new_guess < st.session_state.secret_number:
+            elif guess < st.session_state.secret_number:
+                remaining = (ATTEMPTS - st.session_state.attempts)
 
-                # Attempts - 1 chance
-                remaining = 3 - st.session_state.attempts
+                st.warning(
+                    f"📉 Too low! "
+                    f"You have **{remaining} chances** left."
+                )
 
-                st.warning(f"📉 Too low! You have **{remaining} chances** left.")
-
-            # Guess to High
             else:
-                # Calculate remaining attempts 
-                remaining = 3 - st.session_state.attempts
-                st.warning(f"📈 Too high! You have **{remaining} chances** left.")
+                remaining = (ATTEMPTS - st.session_state.attempts)
 
-#===== FINAL GAME OVER SCREEN =====
+                st.warning(
+                    f"📈 Too high! "
+                    f"You have **{remaining} chances** left."
+                )
+
     else:
-        # Player successfully completed the game
         if st.session_state.final_won:
             st.success(
-                f"🎉🏆 CONGRATULATIONS "
-                f"{st.session_state.username}! "
-                f"YOU COMPLETED THIS GAME!"
+                f"🎉🏆 Congratulations "
+                f"**{st.session_state.username}**!"
+            )
+            st.success( "***You successfully completed all Stages.***")
+
+        else:
+            st.error("GAME OVER!")
+
+            st.write(
+                f"Attempts used: "
+                f"**{st.session_state.attempts}/"
+                f"{ATTEMPTS}**"
             )
 
-        # Player failed the final stage
-        else:
-            st.error(" GAME OVER!")
-
-            # Show the number of attempt used
-            st.write(f"Attempts used: "f"**{st.session_state.attempts}/3**")
             st.divider()
 
-            # Game over messege 
             st.subheader(f"{st.session_state.username} ! BETTER LUCK NEXT TIME")
+
             st.error("SYSTEM FAILURE")
 
-            # Restart Button 
             if st.button("Restart Game"):
-
-                # Create new stage 1 number
-                st.session_state.secret_number = random.randint(1, 50)
-                st.session_state.attempts = 0
-                st.session_state.game_over = False
-                st.session_state.next_stage = False
-                st.session_state.third_stage = False
-                st.session_state.final_stage = False
-                st.session_state.final_won = False
-
+                restart_game()
                 st.rerun()
 
+def main():
+    initialize_state()
 
-    
+    st.title("🎯 Simple Number Guessing Game")
+
+    if not st.session_state.logged_in:
+        show_login()
+
+    elif st.session_state.stage == 1:
+        show_stage_one()
+
+    elif st.session_state.stage == 2:
+        show_stage_two()
+
+    elif st.session_state.stage == 3:
+        show_stage_three()
+
+    elif st.session_state.stage == 4:
+        show_final_stage()
+
+if __name__ == "__main__":
+    main()
