@@ -99,7 +99,7 @@ def show_stage_one():
             st.warning("📈 Too high! Try a lower number.")
 
         else:
-            st.session_state.game_over = True
+            st.session_state.game_over = True 
 
             st.success(
                 f"🎉 Congratulations **{st.session_state.username}**! "
