@@ -72,12 +72,12 @@ After running the command, Streamlit will provide a local URL in the terminal. O
 
 ## Future Improvements
 
-* **Add difficulty levels.
-* **Add a score system.
-* **Add a leaderboard.
-* **Add a timer for each stage.
-* **Store player scores.
-* **Add more game stages.
+* **Add difficulty levels.**
+* **Add a score system.**
+* **Add a leaderboard.**
+* **Add a timer for each stage.**
+* **Store player scores.**
+* **Add more game stages.**
 
 ## Support
 
