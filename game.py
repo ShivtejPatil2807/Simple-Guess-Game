@@ -65,9 +65,9 @@ def show_login():
 
     with st.form("login_form"):
         username = st.text_input("Username:")
-        submit = st.form_submit_button("Start Game")
+        start = st.form_submit_button("Start Game")
 
-        if submit:
+        if start:
             username = username.strip()
 
             if username:
@@ -171,7 +171,7 @@ def show_stage_three():
         submit = st.form_submit_button("Verify")
 
         if submit:
-        
+            
             if answer == correct_answer:
                 st.success("✅ Verification successful!")
                 start_final_stage()
