@@ -24,15 +24,17 @@ The project provides a simple and user-friendly interface and demonstrates the u
 * 🎲 **Random Module**
 * 🔧 **Git & GitHub**
 
-## Usage
+## ⚙️ How It Works
 
-1. Enter your username on the login page.
-2. Click the **Submit** button.
-3. Start the guessing game.
-4. Enter a number as your guess.
-5. Check the hint provided by the application.
-6. Continue guessing until you find the correct number.
-7. After winning, use the available options to play again or continue to the next stage.
+1. The user enters their username.
+2. The game starts after submitting the username.
+3. A random number is generated.
+4. The user enters a guess.
+5. The application provides feedback depending on the guess.
+6. The player progresses through the game stages.
+7. After successfully completing the stages, the success screen is displayed.
+8. If the player fails, the game-over screen is displayed.
+9. The player can start another game.
 
 ## Installation
 
@@ -68,27 +70,20 @@ After running the command, Streamlit will provide a local URL in the terminal. O
 
 🚀 Coming soon! The application will be deployed using Streamlit Community Cloud.
 
-## What I Learned
+## Future Improvements
 
-Through this project, I learned and practiced:
-
-* Python programming fundamentals
-* Conditional statements
-* Loops
-* Functions
-* Random number generation
-* Streamlit components
-* Streamlit session state
-* User input handling
-* Creating interactive web applications
-* Git and GitHub
-* Managing and publishing a project repository
+* **Add difficulty levels.
+* **Add a score system.
+* **Add a leaderboard.
+* **Add a timer for each stage.
+* **Store player scores.
+* **Add more game stages.
 
 ## Support
 
 If you find any issue with this project or have suggestions for improvement, you can create an **Issue** in this GitHub repository.
 
-## License
+## 📄 License
 
 This project is available for educational and learning purposes.
 
