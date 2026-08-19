@@ -6,7 +6,7 @@ Simple Guess Game is an interactive number guessing web application built using 
 
 The project provides a simple and user-friendly interface and demonstrates the use of Python programming concepts along with Streamlit for building an interactive web application.
 
-## Features
+## ✨ Features
 
 * **User Login:** Users can enter their username before starting the game.
 * **Random Number Generation:** The application generates a random number for the user to guess.
@@ -17,7 +17,7 @@ The project provides a simple and user-friendly interface and demonstrates the u
 * **Interactive UI:** The application provides a simple and interactive Streamlit interface.
 * **Session State:** Streamlit session state is used to maintain the user's game information during the session.
 
-## Technologies Used
+## 🛠️ Technologies Used
 
 * 🐍 **Python**
 * 🎈 **Streamlit**
@@ -36,7 +36,7 @@ The project provides a simple and user-friendly interface and demonstrates the u
 8. If the player fails, the game-over screen is displayed.
 9. The player can start another game.
 
-## Installation
+## 📦 Installation
 
 ### 1. Clone the Repository
 
@@ -70,7 +70,7 @@ After running the command, Streamlit will provide a local URL in the terminal. O
 
 🚀 Coming soon! The application will be deployed using Streamlit Community Cloud.
 
-## Future Improvements
+## 🚀 Future Improvements
 
 * **Add difficulty levels.**
 * **Add a score system.**
@@ -79,7 +79,7 @@ After running the command, Streamlit will provide a local URL in the terminal. O
 * **Store player scores.**
 * **Add more game stages.**
 
-## Support
+## ✉️ Support
 
 If you find any issue with this project or have suggestions for improvement, you can create an **Issue** in this GitHub repository.
 
