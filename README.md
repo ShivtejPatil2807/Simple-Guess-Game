@@ -66,12 +66,12 @@ streamlit run game.py
 
 After running the command, Streamlit will provide a local URL in the terminal. Open that URL in your web browser to start playing the game.
 
-## Live Demo
+## 🎮 Live Demo
 
-🎮 **Play the game online:**  
+🎯 **Play the game online:**  
 👉 [Simple Guess Game](https://simple-guess-game.streamlit.app/)
 
-## 🚀 Future Improvements
+## 🚀 Future Improvements🦗
 
 * **Add difficulty levels.**
 * **Add a score system.**
