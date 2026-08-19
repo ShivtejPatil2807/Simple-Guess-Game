@@ -4,8 +4,8 @@ import random
 ATTEMPTS = 3
 
 st.set_page_config(
-    page_title = "Guess Game",
-    page_icon = "🤔",
+    page_title = "Guess_Game",
+    page_icon = "🎯",
     layout = "centered"
 )
 
