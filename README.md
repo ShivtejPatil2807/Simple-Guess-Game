@@ -71,7 +71,7 @@ After running the command, Streamlit will provide a local URL in the terminal. O
 🎯 **Play the game online:**  
 👉 [Simple Guess Game](https://simple-guess-game.streamlit.app/)
 
-## 🚀 Future Improvements🦗
+## 🚀 Future Improvements
 
 * **Add difficulty levels.**
 * **Add a score system.**
