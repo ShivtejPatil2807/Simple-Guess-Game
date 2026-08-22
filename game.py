@@ -125,7 +125,7 @@ def show_stage_one():
 def show_stage_two():
     st.success("🎉 Congratulations! You're moving to the next level,Your next opponent is You.")
 
-    st.subheader("⚠️ CRITICAL WARNING READ BEFORE YOU ENTER ")
+    st.subheader(" INSTRUCTIONS READ BEFORE YOU ENTER ")
 
     st.write("**1.You have successfully completed the first stage.**" )
 
