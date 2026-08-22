@@ -96,7 +96,7 @@ def show_stage_one():
         "Enter your guess:",
         min_value = 1,
         max_value = 50,
-        step=1
+        step = 1
     )
 
     if st.button("Submit Guess"):
