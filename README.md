@@ -12,6 +12,8 @@ The project provides a simple and user-friendly interface and demonstrates the u
 * **Random Number Generation:** The application generates a random number for the user to guess.
 * **Number Guessing:** Users can enter their guesses and try to find the correct number.
 * **Guess Hints:** The application provides feedback to help users determine whether their guess is too high or too low.
+* **Pattern Challenge:** Players must identify a hidden mathematical pattern and calculate the missing answer.
+* **Randomized Challenges:** Pattern challenges use randomly generated numbers.
 * **Winning Message:** A success message is displayed when the user guesses the correct number.
 * **Play Again:** Users can restart the game and play again.
 * **Interactive UI:** The application provides a simple and interactive Streamlit interface.
