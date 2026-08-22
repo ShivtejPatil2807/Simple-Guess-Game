@@ -30,13 +30,15 @@ The project provides a simple and user-friendly interface and demonstrates the u
 
 1. The user enters their username.
 2. The game starts after submitting the username.
-3. A random number is generated.
-4. The user enters a guess.
-5. The application provides feedback depending on the guess.
-6. The player progresses through the game stages.
-7. After successfully completing the stages, the success screen is displayed.
-8. If the player fails, the game-over screen is displayed.
-9. The player can start another game.
+3. A random number is generated for the number guessing stage.
+4. The user enters a guess and receives feedback depending on the result.
+5. The player progresses through the different game stages.
+6. The player encounters a same instructions before continuing.
+7. The Pattern Challenge displays a sequence of mathematical equations.
+8. The player must identify the hidden pattern and calculate the missing answer.
+9. After successfully completing all stages, the success screen is displayed.
+10. If the player fails, the game-over screen is displayed.
+11. The player can start another game.
 
 ## 📦 Installation
 
