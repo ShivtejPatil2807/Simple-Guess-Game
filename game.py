@@ -20,6 +20,9 @@ def initialize_state():
         "final_won": False,
         "challenge_a": random.randint(2, 10),
         "challenge_b": random.randint(2, 10),
+        "pattern_a": random.randint(1,5),
+        "pattern_b": random.randint(2,6),
+        "pattern_completed": False
     }
     for key, value in Stages.items():
         if key not in st.session_state:
@@ -35,15 +38,22 @@ def start_stage_one():
 
 
 def start_final_stage():
-    st.session_state.stage = 4
+    st.session_state.stage = 5
     st.session_state.secret_number = random.randint(1, 30)
     st.session_state.attempts = 0
     st.session_state.game_over = False
     st.session_state.final_won = False
 
 
-def start_stage_three():
+def start_pattern_stage():
     st.session_state.stage = 3
+    st.session_state.pattern_a = random.randint(1, 5)
+    st.session_state.pattern_b = random.randint(2, 6)
+    st.session_state.pattern_completed = False
+
+
+def start_stage_four():
+    st.session_state.stage = 4
     st.session_state.challenge_a = random.randint(2, 10)
     st.session_state.challenge_b = random.randint(2, 10)
 
@@ -146,13 +156,47 @@ def show_stage_two():
 
         if continue_button:
             if agree_checkbox:
-                start_stage_three()
+                start_pattern_stage()
                 st.rerun()
             else:
                 st.error("You must accept the rules before continuing.")
 
 
-def show_stage_three():
+def show_pattern_stage():
+    st.subheader("🧠 Pattern Challenge")
+
+    a = st.session_state.pattern_a
+    b = st.session_state.pattern_b
+
+    st.write(f"1. {a} + {b} = {a**2 + b**2}")
+    st.write(f"2. {a + 1} + {b + 1} = {(a + 1)**2 + (b + 1)**2}")
+    st.write(f"3. {a + 2} + {b + 2} = {(a + 2)**2 + (b + 2)**2}")
+
+    next_a = a + 3
+    next_b = b + 3
+
+    st.write(f"4. {next_a} + {next_b} = ?")
+
+    with st.form("Pattern form"):
+        answer = st.number_input(
+            "Enter a missing answer :",
+            min_value = 0,
+            step = 1
+        )
+        submit =st.form_submit_button("Verify Pattern")
+
+        if submit:
+            correct_answer = next_a**2 + next_b**2
+
+            if answer == correct_answer:
+                st.session_state.pattern_completed = True
+                st.success("Verify Pattern")
+                st.session_state.stage = 4
+                st.rerun()
+            else:
+                st.error("❌ Incorrect pattern. Look carefully and try again.")
+
+def show_stage_four():
     st.subheader("👁️ Now the real challenge begins")
     st.write("Before entering the final stage, solve this verification challenge.")
 
@@ -263,6 +307,8 @@ def main():
 
     st.title("🎯 Simple Number Guessing Game")
 
+    st.divider()
+
     if not st.session_state.logged_in:
         show_login()
 
@@ -273,9 +319,12 @@ def main():
         show_stage_two()
 
     elif st.session_state.stage == 3:
-        show_stage_three()
+        show_pattern_stage()
 
     elif st.session_state.stage == 4:
+        show_stage_four()
+
+    elif st.session_state.stage == 5:
         show_final_stage()
 
 if __name__ == "__main__":
