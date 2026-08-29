@@ -95,7 +95,6 @@ This project is available for educational and learning purposes.
 ---
 
 ### 👨‍💻 Author
-
 **Shivtej Patil**
 
 GitHub: [ShivtejPatil2807](https://github.com/ShivtejPatil2807)
