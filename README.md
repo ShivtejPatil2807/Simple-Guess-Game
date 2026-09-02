@@ -4,6 +4,8 @@
 
 Simple Guess Game is an interactive number guessing web application built using **Python and Streamlit**. The application allows users to enter their username and play a number guessing game where they try to find a randomly generated number.
 
+A multi-stage number guessing game built with Streamlit. Players progress through five increasingly challenging stages — from a basic guessing game to math pattern puzzles and a high-stakes final round with limited attempts to guess the number.
+
 The project provides a simple and user-friendly interface and demonstrates the use of Python programming concepts along with Streamlit for building an interactive web application.
 
 ## ✨ Features
@@ -95,7 +97,6 @@ This project is available for educational and learning purposes.
 ---
 
 ### 👨‍💻 Author
-
 **Shivtej Patil**
 
 GitHub: [ShivtejPatil2807](https://github.com/ShivtejPatil2807)
