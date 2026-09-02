@@ -135,7 +135,8 @@ def show_stage_two():
 
 
 def show_pattern_stage():
-    st.subheader("🧠 Pattern Challenge")
+    st.subheader("👁️ Now the real challenge begins")
+    st.write("Get Ready for the Pattern Challenge !")
 
     a = st.session_state.pattern_a
     b = st.session_state.pattern_b
@@ -163,7 +164,7 @@ def show_pattern_stage():
 
 
 def show_stage_four():
-    st.subheader("👁️ Now the real challenge begins")
+    st.subheader("Welcome to the Ultimate Math Challenge !🧠⚡")
     st.write("Before entering the final stage, solve this verification challenge.")
 
     a = st.session_state.challenge_a
