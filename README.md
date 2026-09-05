@@ -72,7 +72,7 @@ streamlit run game.py
 
 After running the command, Streamlit will provide a local URL in the terminal. Open that URL in your web browser to start playing the game.
 
-## Project Structure
+## 📂 Project Structure
 
 ```text
 Guess-Game/
