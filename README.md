@@ -88,8 +88,7 @@ Guess-Game/
 
 ## 🎮 Live Demo
 
-🎯 **Play the game online:**  
-👉 [Simple Guess Game](https://simple-guess-game.streamlit.app/)
+🎯 **Play the game online:**  👉 [Simple Guess Game](https://simple-guess-game.streamlit.app/)
 
 ## 🚀 Future Improvements
 
