@@ -109,7 +109,7 @@ Guess-Game/
 
 ## ✉️ Support
 
-If you find any issue with this project or have suggestions for improvement, you can create an **Issue** in this GitHub repository.
+If you find an issue with this project or have suggestions for improvement, please open an Issue in this GitHub repository, or reach out via GitHub.
 
 ## 📄 License
 
