@@ -1,5 +1,13 @@
 # 🎯 Simple Guess Game
 
+<p align="center">
+
+![Python](https://img.shields.io/badge/Python-3.x-blue?logo=python&logoColor=white)
+![Streamlit](https://img.shields.io/badge/Streamlit-App-red?logo=streamlit&logoColor=white)
+![License](https://img.shields.io/badge/License-Educational-green)
+
+</p>
+
 ## Introduction
 
 Simple Guess Game is an interactive number guessing web application built using **Python and Streamlit**. The application allows users to enter their username and play a number guessing game where they try to find a randomly generated number.
