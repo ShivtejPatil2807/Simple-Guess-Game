@@ -64,19 +64,24 @@ git clone https://github.com/ShivtejPatil2807/Simple-Guess-Game.git
 cd Simple-Guess-Game
 ```
 
-### 3. Install Streamlit
+### 3. Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+### 4. install Streamlit 
 
 ```bash
 pip install streamlit
 ```
 
-### 4. Run the Application
+### 5. Run the Application
 
 ```bash
 streamlit run game.py
 ```
 
-### 5. Open the Application
+### 6. Open the Application
 
 After running the command, Streamlit will provide a local URL in the terminal. Open that URL in your web browser to start playing the game.
 
