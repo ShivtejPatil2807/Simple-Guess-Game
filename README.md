@@ -16,6 +16,12 @@ A multi-stage number guessing game built with Streamlit. Players progress throug
 
 The project provides a simple and user-friendly interface and demonstrates the use of Python programming concepts along with Streamlit for building an interactive web application.
 
+## 🔄 Major Project Update
+
+This project started as a simple **Number Guessing Game** created to practice Python and Streamlit fundamentals. As I continued learning and improving my programming skills, I decided to completely redesign and rebuild the project instead of keeping it as a basic guessing game.
+
+The project is now being upgraded into a more complete and interactive **multi-level guessing game** with a better user experience, improved game logic, multiple stages, progression, and a redesigned interface.
+
 ## ✨ Features
 
 * **User Login:** Users can enter their username before starting the game.
