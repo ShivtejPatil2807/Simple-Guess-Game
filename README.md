@@ -8,6 +8,10 @@
 
 </p>
 
+## Project Status
+
+This project is currently under development 
+
 ## Introduction
 
 Simple Guess Game is an interactive number guessing web application built using **Python and Streamlit**. The application allows users to enter their username and play a number guessing game where they try to find a randomly generated number.
